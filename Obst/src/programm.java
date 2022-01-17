@@ -1,4 +1,4 @@
-public class ObstProgramme {
+public class programm {
     public static void main(String[] args) {
         Apple apple = new Apple();
 
@@ -26,5 +26,6 @@ public class ObstProgramme {
         System.out.println(banane.getGewicht());
         System.out.println(banane.isReif());
         System.out.println(banane.kruemmung() + "°");
+        System.out.println(banane);
     }
 }
