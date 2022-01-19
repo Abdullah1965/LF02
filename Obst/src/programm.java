@@ -2,7 +2,7 @@ public class programm {
     public static void main(String[] args) {
         Apple apple = new Apple();
 
-        //apple.getName("Apple");
+        //Apple
         apple.setFarbe("Grün");
         apple.setGewicht(75);
         apple.setReif(true);
