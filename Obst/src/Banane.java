@@ -9,11 +9,14 @@ public class Banane extends Obst{
     public void setKruemmung(double kruemmung) {
         this.kruemmung = kruemmung;
     }
-    public String toString(){
-        String text = "";
-        text += "\nName: \t" + getName();
-        text += "\nFarbe: \t" + getFarbe();
 
-        return text;
-    }
+  //  public String toString(){
+    //      String text = "";
+    //      text += "\nName: \t" + getName();
+    //      text += "\nFarbe: \t" + getFarbe();
+    //     text += "\nGewicht: \t" + getGewicht();
+    //     text += "\nReif: \t" + isReif();
+    //     text += "\nKruemmung: \t" + kruemmung();
+    //    return text;
+//    }
 }

@@ -29,4 +29,12 @@ public abstract class Obst {
    public void setReif(boolean reif){
        this.reif = reif;
    }
+    public String toString(){
+        String text = "";
+        text += "\nName: \t" + getName();
+        text += "\nFarbe: \t" + getFarbe();
+        text += "\nGewicht: \t" + getGewicht();
+        text += "\nReif: \t" + isReif();
+        return text;
+    }
 }
