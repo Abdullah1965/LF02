@@ -29,6 +29,13 @@ public class Trainer {
     public void setErfahrung(int erfahrung){
         this.erfahrung = erfahrung;
     }
-
+    @Override
+    public String toString(){
+        String tainer = " ";
+        tainer += "\nName: " + name;
+        tainer += "\n\tAlter:\t\t" + alter;
+        tainer += "\n\tErfahrung:\t" + erfahrung;
+        return tainer;
+    }
 
 }

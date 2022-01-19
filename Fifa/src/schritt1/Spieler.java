@@ -55,4 +55,15 @@ public class Spieler {
         this.tore = tore;
     }
 
+    @Override
+    public String toString(){
+        String spieler = " ";
+        spieler += "\nName: " + name;
+        spieler += "\n\tAlter:\t\t" + alter;
+        spieler += "\n\tStärke:\t\t" + starke;
+        spieler += "\n\tTorschuss:\t" + torschuss;
+        spieler += "\n\tMotivation: " + motivation;
+        spieler += "\n\tLebenslang Tore: " + tore;
+        return spieler;
+    }
 }
