@@ -13,6 +13,7 @@ public class programm {
         banane.setGewicht(75);
         banane.setReif(true);
 
+
         System.out.println(banane);
         System.out.println(apple);
     }
