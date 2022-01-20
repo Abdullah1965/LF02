@@ -1,26 +1,13 @@
 package schritt1;
 
-public class Trainer {
-    private String name;
-    private int alter;
+import Schritt3.Person;
+
+public class Trainer extends Person {
     private int erfahrung;
 
     public Trainer(String name, int alter, int erfahrung){
-        this.name = name;
-        this.alter = alter;
+        super(name,alter);
         this.erfahrung = erfahrung;
-    }
-    public String getName(){
-        return name;
-    }
-    public void setName(String name){
-        this.name = name;
-    }
-    public int getAlter(){
-        return alter;
-    }
-    public void setAlter(int alter){
-        this.alter = alter;
     }
 
     public int getErfahrung(){
@@ -31,9 +18,7 @@ public class Trainer {
     }
     @Override
     public String toString(){
-        String tainer = " ";
-        tainer += "\nName: " + name;
-        tainer += "\n\tAlter:\t\t" + alter;
+        String tainer = super.toString();
         tainer += "\n\tErfahrung:\t" + erfahrung;
         return tainer;
     }
