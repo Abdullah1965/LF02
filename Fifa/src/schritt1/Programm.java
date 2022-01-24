@@ -11,5 +11,6 @@ public class Programm {
         System.out.println(cristiano);
         System.out.println(zidane);
         System.out.println(yunus);
+        System.out.println();
     }
 }

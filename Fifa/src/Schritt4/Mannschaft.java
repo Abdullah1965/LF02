@@ -47,10 +47,20 @@ public class Mannschaft {
 
     public double getMotivation(){
        int motivationSumme = 0;
-       int motivationdurchschnitt;
+       int motivationdurchschnitt = 0;
        for (int i = 0;i < spielerListe.size(); i++){
-           motivationSumme += spielerListe.get(i).getMotivation();
+           motivationdurchschnitt += spielerListe.get(i).getMotivation();
        }
+       motivationSumme = motivationdurchschnitt / spielerListe.size();
        return motivationSumme;
+    }
+    public double getstarke(){
+        int starkeSumme = 0;
+        int motivationdurchschnitt = 0;
+        for (int i = 0;i < spielerListe.size();i++){
+            motivationdurchschnitt += spielerListe.get(i).getStarke();
+        }
+        starkeSumme = motivationdurchschnitt / spielerListe.size();
+        return starkeSumme;
     }
 }
