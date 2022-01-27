@@ -11,8 +11,9 @@ public class Mannschaft {
     private Trainer trainer;
     private Torwart torwart;
     private ArrayList<Spieler> spielerListe;
-    public Mannschaft(String name,Trainer trainer,Torwart torwart) {
+    public Mannschaft(String name,Trainer trainer,Torwart torwart,ArrayList<Spieler> spielerListe) {
         this.name = name;
+        this.spielerListe = spielerListe;
         this.trainer = trainer;
         this.torwart = torwart;
     }
@@ -45,7 +46,7 @@ public class Mannschaft {
         this.spielerListe = spielerListe;
     }
 
-    public double getMotivation(){
+    public int getMotivation(){
        int motivationSumme = 0;
        int motivationdurchschnitt = 0;
        for (int i = 0;i < spielerListe.size(); i++){
@@ -54,7 +55,7 @@ public class Mannschaft {
        motivationSumme = motivationdurchschnitt / spielerListe.size();
        return motivationSumme;
     }
-    public double getstarke(){
+    public int getstarke(){
         int starkeSumme = 0;
         int motivationdurchschnitt = 0;
         for (int i = 0;i < spielerListe.size();i++){
@@ -62,5 +63,20 @@ public class Mannschaft {
         }
         starkeSumme = motivationdurchschnitt / spielerListe.size();
         return starkeSumme;
+    }
+
+    @Override
+    public String toString(){
+        String mannschaft = " ";
+        mannschaft += "\nName: " + getName();
+        mannschaft += "\nTrainar: \t" + getTrainer();
+        mannschaft += "\nTorwart: " + getTorwart();
+        mannschaft += "\nSpieler: ";
+        for (int i = 0; i < spielerListe.size(); i++) {
+            mannschaft += "\n" + spielerListe.get(i).toString();
+        }
+        mannschaft += "\nMotivation: " + getMotivation();
+        mannschaft += "\nSträke: " + getstarke();
+        return mannschaft;
     }
 }
