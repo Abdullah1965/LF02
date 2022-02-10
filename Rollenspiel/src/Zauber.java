@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Zauber extends Spielfigur{
         private int zauberpunkte;
 
@@ -15,7 +17,12 @@ public class Zauber extends Spielfigur{
         }
 
         public void zaubern() throws KeineKraftException {
+            Random random = new Random();
             if (getZauberpunkte() >= 1){
+                int i = random.nextInt(10) - 1;
+                if (i == 1){
+                    setStaerkepunkte(getStaerkepunkte() + 1);
+                }
                 zauberpunkte--;
                 System.out.println(getName() + "\tZaubern");
             }

@@ -53,7 +53,7 @@ public abstract class Spielfigur {
     }
 
     public String toString() {
-        String Spielfigur = "\nname \t" + name;
+        String Spielfigur = "name \t" + name;
         Spielfigur += "\nStaerkepunkte \t" + staerkepunkte;
         return Spielfigur;
     }
