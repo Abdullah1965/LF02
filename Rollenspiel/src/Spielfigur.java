@@ -1,6 +1,9 @@
 public abstract class Spielfigur {
     private String name;
     private int staerkepunkte;
+    private int hp;
+    private int attackt;
+    private int defend;
 
     public Spielfigur(String name, int staerkepunkte) {
         this.name = name;
