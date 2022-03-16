@@ -3,8 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Fifa/Fifa.iml" filepath="$PROJECT_DIR$/Fifa/Fifa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Kaufvertrag/Kaufvertrag.iml" filepath="$PROJECT_DIR$/Kaufvertrag/Kaufvertrag.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Konto/Konto.iml" filepath="$PROJECT_DIR$/Konto/Konto.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/LF02.iml" filepath="$PROJECT_DIR$/.idea/LF02.iml" />
       <module fileurl="file://$PROJECT_DIR$/Rollenspiel/Rollenspiel.iml" filepath="$PROJECT_DIR$/Rollenspiel/Rollenspiel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Tresor/Tresor.iml" filepath="$PROJECT_DIR$/Tresor/Tresor.iml" />
     </modules>
   </component>
 </project>
