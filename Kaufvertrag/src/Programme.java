@@ -26,6 +26,8 @@ class Programm {
 		vertrag.setZahlungsModalitaeten("Privater Barverkauf");
 		
 		System.out.println(vertrag);
+
+
 		String datei = "H:/LF02/versuch1.csv";
 		PrintWriter writer = new PrintWriter(datei);
 		writer.println(vertrag);
