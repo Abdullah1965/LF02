@@ -28,9 +28,9 @@ class Programm {
 		System.out.println(vertrag);
 
 
-		String datei = "H:/LF02/versuch1.csv";
-		PrintWriter writer = new PrintWriter(datei);
-		writer.println(vertrag);
-		writer.close();
+	//	String datei = "H:/LF02/versuch1.csv";
+	//	PrintWriter writer = new PrintWriter(datei);
+	//	writer.println(vertrag);
+	//	writer.close();
 	}
 }
