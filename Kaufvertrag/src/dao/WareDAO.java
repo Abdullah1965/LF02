@@ -16,11 +16,11 @@ public class WareDAO {
 
     /**
      * Liest einen Vertragspartner auf Basis seiner Ausweisnummer
-     * @param bezeichnung die Ausweisnummer
+     * @param warenNr die Ausweisnummer
      * @return Der gewünschte Vertragspartner
      */
 
-    public Ware read(String bezeichnung) {
+    public Ware read(String warenNr) {
         Ware ware = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -30,9 +30,11 @@ public class WareDAO {
             connection = DriverManager.getConnection(CONNECTIONSTRING);
 
             //SQL-Abfrage erstellen
-            String sql = "SELECT * FROM vertragspartner WHERE bezeichnung = ?";
+            String sql = "SELECT * FROM ware WHERE warenNr = ?";
+
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, bezeichnung);
+
+            preparedStatement.setString(1, warenNr);
 
             //SQL-Abfrage ausführen
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -41,6 +43,7 @@ public class WareDAO {
             resultSet.next();
 
             //ResultSet auswerten
+           int warennr = resultSet.getInt("warenNr");
             String bz = resultSet.getString("bezeichnung");
             String bs = resultSet.getString("beschreibung");
             double preis = resultSet.getDouble("preis");
@@ -49,9 +52,23 @@ public class WareDAO {
 
             //Vertragspartner erstellen
             ware = new Ware(bz,preis);
+            ware.setWarenNr(warennr);
             ware.setBeschreibung(bs);
-            ware.getBesonderheitenListe().add(besonderheiten);
-            ware.getMaengelListe().add(maengel);
+
+            if (besonderheiten != null){
+                String[] besonderheitenArray = besonderheiten.split(";");
+                for (String b: besonderheitenArray){
+                    ware.getBesonderheitenListe().add(b);
+                }
+            }
+
+            if (maengel != null){
+                String[] maengelArray = maengel.split(";");
+                for (String maegel: maengelArray){
+                   ware.getMaengelListe().add(maegel);
+                }
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

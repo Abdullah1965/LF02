@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Ware {
 
+	private int warenNr;
 	private String bezeichnung;
 	private String beschreibung;
 	private double preis;
@@ -20,6 +21,13 @@ public class Ware {
 		this.preis = preis;
 		besonderheitenListe = new ArrayList<String>();
 		maengelListe = new ArrayList<String>();
+	}
+
+	public int getWarenNr() {
+		return warenNr;
+	}
+	public void setWarenNr(int warenNr) {
+		this.warenNr = warenNr;
 	}
 
 	/**

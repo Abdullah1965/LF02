@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/LF02.iml" filepath="$PROJECT_DIR$/.idea/LF02.iml" />
       <module fileurl="file://$PROJECT_DIR$/Rollenspiel/Rollenspiel.iml" filepath="$PROJECT_DIR$/Rollenspiel/Rollenspiel.iml" />
       <module fileurl="file://$PROJECT_DIR$/Tresor/Tresor.iml" filepath="$PROJECT_DIR$/Tresor/Tresor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Kaufvertrag/daoWare.iml" filepath="$PROJECT_DIR$/Kaufvertrag/daoWare.iml" />
     </modules>
   </component>
 </project>
