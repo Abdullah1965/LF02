@@ -1,28 +1,27 @@
 package dao;
 
-import businessObjects.Adresse;
-import businessObjects.Vertragspartner;
+import businessObjects.Ware;
 
 import java.sql.*;
 
 import static java.lang.Class.forName;
 
-public class VertragspartnerDAO {
+public class WareDAO {
     private final String CLASSNAME = "org.sqlite.JDBC";
     private final String CONNECTIONSTRING = "jdbc:sqlite:Kaufvertrag/src/data/Vetragspather.db";
 
-    public VertragspartnerDAO() throws ClassNotFoundException {
+    public WareDAO() throws ClassNotFoundException {
         forName(CLASSNAME);
     }
 
     /**
      * Liest einen Vertragspartner auf Basis seiner Ausweisnummer
-     * @param ausweisNr die Ausweisnummer
+     * @param bezeichnung die Ausweisnummer
      * @return Der gewünschte Vertragspartner
      */
 
-    public Vertragspartner read(String ausweisNr) {
-        Vertragspartner vertragspartner = null;
+    public Ware read(String bezeichnung) {
+        Ware ware = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -31,9 +30,9 @@ public class VertragspartnerDAO {
             connection = DriverManager.getConnection(CONNECTIONSTRING);
 
             //SQL-Abfrage erstellen
-            String sql = "SELECT * FROM vertragspartner WHERE ausweisNr = ?";
+            String sql = "SELECT * FROM vertragspartner WHERE bezeichnung = ?";
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, ausweisNr);
+            preparedStatement.setString(1, bezeichnung);
 
             //SQL-Abfrage ausführen
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -42,18 +41,17 @@ public class VertragspartnerDAO {
             resultSet.next();
 
             //ResultSet auswerten
-            String nr = resultSet.getString("ausweisNr");
-            String vorname = resultSet.getString("vorname");
-            String nachname = resultSet.getString("nachname");
-            String strasse = resultSet.getString("strasse");
-            String hausNr = resultSet.getString("hausNr");
-            String plz = resultSet.getString("plz");
-            String ort =  resultSet.getString("ort");
+            String bz = resultSet.getString("bezeichnung");
+            String bs = resultSet.getString("beschreibung");
+            double preis = resultSet.getDouble("preis");
+            String besonderheiten = resultSet.getString("besonderheiten");
+            String maengel = resultSet.getString("maengel");
 
             //Vertragspartner erstellen
-            vertragspartner = new Vertragspartner(vorname, nachname);
-            vertragspartner.setAusweisNr(nr);
-            vertragspartner.setAdresse(new Adresse(strasse,hausNr, plz,ort));
+            ware = new Ware(bz,preis);
+            ware.setBeschreibung(bs);
+            ware.getBesonderheitenListe().add(besonderheiten);
+            ware.getMaengelListe().add(maengel);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -63,6 +61,6 @@ public class VertragspartnerDAO {
                 e.printStackTrace();
             }
         }
-        return vertragspartner;
+        return ware;
     }
 }

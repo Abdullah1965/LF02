@@ -1,5 +1,4 @@
 package schritt1;
-
 import Schritt3.Person;
 
 public class Spieler extends Person {
@@ -15,6 +14,7 @@ public class Spieler extends Person {
         this.motivation = motivation;
         this.tore = tore;
     }
+
     public int getStarke(){
         return starke;
     }

@@ -1,9 +1,7 @@
 package Schritt4;
-
 import Schritt2.Torwart;
 import schritt1.Spieler;
 import schritt1.Trainer;
-
 import java.util.ArrayList;
 
 public class Mannschaft {

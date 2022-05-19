@@ -1,7 +1,8 @@
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-class Programm {
+class
+Programm {
 
 	Programm() throws FileNotFoundException {
 	}
