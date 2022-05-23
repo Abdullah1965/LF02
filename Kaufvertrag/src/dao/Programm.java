@@ -19,5 +19,8 @@ public class Programm {
 
         Ware ware = new WareDAO().read("0");
         System.out.println(ware);
+
+
+        ArrayList<Ware> wareArrayList = WareDAO.read();
     }
 }

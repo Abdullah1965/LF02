@@ -67,15 +67,22 @@ public class VertragspartnerDAO {
             e.printStackTrace();
         } finally {
             try {
-                connection.close();
+                preparedStatement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return vertragspartner;
     }
 
     public ArrayList<Vertragspartner> read(){
+
         ArrayList<Vertragspartner> vertragspartnerArrayList = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -118,9 +125,15 @@ public class VertragspartnerDAO {
             e.printStackTrace();
         } finally {
             try {
-                connection.close();
+                preparedStatement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return vertragspartnerArrayList;
