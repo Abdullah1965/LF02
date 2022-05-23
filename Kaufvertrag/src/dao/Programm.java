@@ -16,11 +16,13 @@ public class Programm {
         for (Vertragspartner v: vertragspartnerArrayList){
             System.out.println(v);
         }
+        WareDAO wareDAO = new WareDAO();
+      //  Ware ware = wareDAO.read("0");
+       // System.out.println(ware);
 
-        Ware ware = new WareDAO().read("0");
-        System.out.println(ware);
-
-
-        ArrayList<Ware> wareArrayList = WareDAO.read();
+        ArrayList<Ware> wareArrayList = wareDAO.read();
+        for (Ware w:wareArrayList){
+            System.out.println(w);
+        }
     }
 }
