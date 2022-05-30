@@ -138,4 +138,100 @@ public class VertragspartnerDAO {
         }
         return vertragspartnerArrayList;
     }
+
+    public void update(Vertragspartner vertragspartner) {
+
+        Connection connection = null;
+
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            connection = DriverManager.getConnection(CONNECTIONSTRING);
+            String sql = "UPDATE Vertragspartner SET Vorname = ?, Nachname = ?, Straße = ?, HausNr = ?, Plz = ?, Ort = ? WHERE AusweisNr = ?";
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, vertragspartner.getVorname());
+            preparedStatement.setString(2, vertragspartner.getNachname());
+            preparedStatement.setString(3, vertragspartner.getAdresse().getStrasse());
+            preparedStatement.setString(4, vertragspartner.getAdresse().getHausNr());
+            preparedStatement.setString(5, vertragspartner.getAdresse().getPlz());
+            preparedStatement.setString(6, vertragspartner.getAdresse().getOrt());
+            preparedStatement.setString(7, vertragspartner.getAusweisNr());
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public Vertragspartner create(Vertragspartner vertragspartner) throws Exception {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = DriverManager.getConnection(CONNECTIONSTRING);
+            //SQL-Abfrage erstellen
+            String sql = "INSERT INTO vertragspartner (Ausweisnummer ,Vorname, Nachname, Straße, HausNr, Plz, Ort) VALUES (?,?,?,?,?,?,?)";
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, vertragspartner.getAusweisNr());
+            preparedStatement.setString(2, vertragspartner.getVorname());
+            preparedStatement.setString(3, vertragspartner.getNachname());
+            preparedStatement.setString(4, vertragspartner.getAdresse().getStrasse());
+            preparedStatement.setString(5, vertragspartner.getAdresse().getHausNr());
+            preparedStatement.setString(6, vertragspartner.getAdresse().getPlz());
+            preparedStatement.setString(7, vertragspartner.getAdresse().getOrt());
+
+            //SQL-Abfrage ausführen
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new Exception("Doppelte ausweisnummer, Der vertragspartner mit der ausweisnummer " + vertragspartner.getAusweisNr());
+        } finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return vertragspartner;
+    }
+        private void delete(String ausweis) {
+            Connection connection = null;
+            PreparedStatement preparedStatement = null;
+            try {
+                connection = DriverManager.getConnection(CONNECTIONSTRING);
+
+                //SQL-Abfrage erstellen
+                String sql = "SELECT * FROM vertragpartner";
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.executeQuery();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 }
