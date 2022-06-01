@@ -24,6 +24,7 @@ public class VertragspartnerDAO {
 
     /**
      * Liest einen Vertragspartner auf Basis seiner Ausweisnummer
+     *
      * @param ausweisNr die Ausweisnummer
      * @return Der gewünschte Vertragspartner
      */
@@ -55,12 +56,12 @@ public class VertragspartnerDAO {
             String strasse = resultSet.getString("strasse");
             String hausNr = resultSet.getString("hausNr");
             String plz = resultSet.getString("plz");
-            String ort =  resultSet.getString("ort");
+            String ort = resultSet.getString("ort");
 
             //Vertragspartner erstellen
             vertragspartner = new Vertragspartner(vorname, nachname);
             vertragspartner.setAusweisNr(nr);
-            vertragspartner.setAdresse(new Adresse(strasse,hausNr, plz,ort));
+            vertragspartner.setAdresse(new Adresse(strasse, hausNr, plz, ort));
 
 
         } catch (SQLException e) {
@@ -81,10 +82,10 @@ public class VertragspartnerDAO {
         return vertragspartner;
     }
 
-    public ArrayList<Vertragspartner> read(){
+    public ArrayList<Vertragspartner> read() {
 
         ArrayList<Vertragspartner> vertragspartnerArrayList = null;
-        Connection connection = null;
+        connection = null;
         PreparedStatement preparedStatement = null;
 
         // Verbindung zu Datenbank herstellen
@@ -100,25 +101,25 @@ public class VertragspartnerDAO {
             vertragspartnerArrayList = new ArrayList<>();
 
             //Zeiger auf den ersten Datensatz setzen
-           while (resultSet.next()) {
+            while (resultSet.next()) {
 
-               //ResultSet auswerten
+                //ResultSet auswerten
 
-               String nr = resultSet.getString("ausweisNr");
-               String vorname = resultSet.getString("vorname");
-               String nachname = resultSet.getString("nachname");
-               String strasse = resultSet.getString("strasse");
-               String hausNr = resultSet.getString("hausNr");
-               String plz = resultSet.getString("plz");
-               String ort = resultSet.getString("ort");
+                String nr = resultSet.getString("ausweisNr");
+                String vorname = resultSet.getString("vorname");
+                String nachname = resultSet.getString("nachname");
+                String strasse = resultSet.getString("strasse");
+                String hausNr = resultSet.getString("hausNr");
+                String plz = resultSet.getString("plz");
+                String ort = resultSet.getString("ort");
 
-               Vertragspartner vertragspartner = new Vertragspartner(vorname, nachname);
-               vertragspartner.setAusweisNr(nr);
-               vertragspartner.setAdresse(new Adresse(strasse,hausNr,plz,ort));
+                Vertragspartner vertragspartner = new Vertragspartner(vorname, nachname);
+                vertragspartner.setAusweisNr(nr);
+                vertragspartner.setAdresse(new Adresse(strasse, hausNr, plz, ort));
 
-               vertragspartnerArrayList.add(vertragspartner);
+                vertragspartnerArrayList.add(vertragspartner);
 
-           }
+            }
 
 
         } catch (SQLException e) {
@@ -139,18 +140,18 @@ public class VertragspartnerDAO {
         return vertragspartnerArrayList;
     }
 
-    public void update(Vertragspartner vertragspartner) {
+    public Vertragspartner create(Vertragspartner vertragspartner) throws Exception {
 
         Connection connection = null;
 
         PreparedStatement preparedStatement = null;
 
         try {
-
             connection = DriverManager.getConnection(CONNECTIONSTRING);
-            String sql = "UPDATE Vertragspartner SET Vorname = ?, Nachname = ?, Straße = ?, HausNr = ?, Plz = ?, Ort = ? WHERE AusweisNr = ?";
-            preparedStatement = connection.prepareStatement(sql);
+            //SQL-Abfrage erstellen
+            String sql = "INSERT INTO vertragspather VALUES (?,?,?,?,?,?,?)";
 
+            preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, vertragspartner.getVorname());
             preparedStatement.setString(2, vertragspartner.getNachname());
             preparedStatement.setString(3, vertragspartner.getAdresse().getStrasse());
@@ -158,43 +159,6 @@ public class VertragspartnerDAO {
             preparedStatement.setString(5, vertragspartner.getAdresse().getPlz());
             preparedStatement.setString(6, vertragspartner.getAdresse().getOrt());
             preparedStatement.setString(7, vertragspartner.getAusweisNr());
-
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                preparedStatement.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            } finally {
-                try {
-                    connection.close();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public Vertragspartner create(Vertragspartner vertragspartner) throws Exception {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        try {
-            connection = DriverManager.getConnection(CONNECTIONSTRING);
-            //SQL-Abfrage erstellen
-            String sql = "INSERT INTO vertragspartner (Ausweisnummer ,Vorname, Nachname, Straße, HausNr, Plz, Ort) VALUES (?,?,?,?,?,?,?)";
-            preparedStatement = connection.prepareStatement(sql);
-
-            preparedStatement.setString(1, vertragspartner.getAusweisNr());
-            preparedStatement.setString(2, vertragspartner.getVorname());
-            preparedStatement.setString(3, vertragspartner.getNachname());
-            preparedStatement.setString(4, vertragspartner.getAdresse().getStrasse());
-            preparedStatement.setString(5, vertragspartner.getAdresse().getHausNr());
-            preparedStatement.setString(6, vertragspartner.getAdresse().getPlz());
-            preparedStatement.setString(7, vertragspartner.getAdresse().getOrt());
-
             //SQL-Abfrage ausführen
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -214,24 +178,115 @@ public class VertragspartnerDAO {
         }
         return vertragspartner;
     }
-        private void delete(String ausweis) {
-            Connection connection = null;
-            PreparedStatement preparedStatement = null;
-            try {
-                connection = DriverManager.getConnection(CONNECTIONSTRING);
 
-                //SQL-Abfrage erstellen
-                String sql = "SELECT * FROM vertragpartner";
-                preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.executeQuery();
+
+    public void delete(String ausweisNr) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        // Verbindung zu Datenbank herstellen
+        try {
+            connection = DriverManager.getConnection(CONNECTIONSTRING);
+            //SQL-Abfrage erstellen
+            String sql = "DELETE FROM vertragspather WHERE ausweisNr = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, ausweisNr);
+            //SQL-Abfrage ausführen
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
             }
         }
+    }
+
+    public void update(String ausweisNr, String strasse, String hausNr) {
+        connection = null;
+        PreparedStatement preparedStatement = null;
+        // Verbindung zu Datenbank herstellen
+        try {
+            connection = DriverManager.getConnection(CONNECTIONSTRING);
+            //SQL-Abfrage erstellen
+            String sql = "UPDATE vertragspather SET strasse = ?,hausNr = ? WHERE ausweisNr = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, strasse );
+            preparedStatement.setString(2, hausNr);
+            preparedStatement.setString(3, ausweisNr);
+            //SQL-Abfrage ausführen
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public void insertInto(String ausweisNr, String vorname, String nachname, String strasse, String hausNr, String plz, String ort) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        // Verbindung zu Datenbank herstellen
+        try {
+            connection = DriverManager.getConnection(CONNECTIONSTRING);
+            //SQL-Abfrage erstellen
+
+            String sql = "INSERT INTO vertragspartner VALUES (?,?,?,?,?,?,?)";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, ausweisNr );
+            preparedStatement.setString(2, vorname);
+            preparedStatement.setString(3, nachname);
+            preparedStatement.setString(4, strasse);
+            preparedStatement.setString(5, hausNr);
+            preparedStatement.setString(6, plz);
+            preparedStatement.setString(7, ort);
+
+            //SQL-Abfrage ausführen
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private Vertragspartner createObject(ResultSet resultSet) throws SQLException {
+        //ResultSet auswerten
+        String nr = resultSet.getString("ausweisNr");
+        String vorname = resultSet.getString("vorname");
+        String nachname = resultSet.getString("nachname");
+        String strasse = resultSet.getString("strasse");
+        String hausNr = resultSet.getString("hausNr");
+        String plz = resultSet.getString("plz");
+        String ort = resultSet.getString("ort");
+
+
+
+        //Vertragspartner erstellen
+
+        Vertragspartner vertragspartner = new Vertragspartner(vorname, nachname);
+
+        vertragspartner.setAusweisNr(nr);
+
+        Adresse adresse = new Adresse(strasse, hausNr, plz, ort);
+
+        vertragspartner.setAdresse(adresse);
+
+
+
+        return vertragspartner;
+
+    }
+
 }
