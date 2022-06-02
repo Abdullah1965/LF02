@@ -41,30 +41,39 @@ public class Programm {
 
         wareDAO.update("1",500,"Laptop");
     */
-        Ware ware = new Ware("Laptop2", 250.0);
-        ware.setWarenNr(2);
+        Ware ware = new Ware("Laptop3", 250.0);
+        ware.setWarenNr("3");
         ware.setBeschreibung("Super krasses Gaming-Laptop");
         ware.getBesonderheitenListe().add("Tasche");
         ware.getBesonderheitenListe().add("Gaming-Maus");
         ware.getMaengelListe().add("Ladekabel fehlt");
         ware.getMaengelListe().add("Touchpad defekt");
+
         wareDAO.create(ware);
 
+        wareDAO.read("3");
+
+        wareDAO.update("3",500,"Gaming-Laptop");
+
+        wareDAO.read("3");
+
+        wareDAO.delete("3");
 
 
-        ArrayList<Vertragspartner> vertragspartnerArrayList = vertragspartnerDAO.read();
+
+   /*     ArrayList<Vertragspartner> vertragspartnerArrayList = vertragspartnerDAO.read();
         System.out.println("-------------------------------");
         for (Vertragspartner v: vertragspartnerArrayList){
             System.out.println(v);
         }
 
+    */
 
       //  Ware ware = wareDAO.read("0");
        // System.out.println(ware);
 
-        ArrayList<Ware> wareArrayList = wareDAO.read();
-        for (Ware w:wareArrayList){
-            System.out.println(w);
-        }
+
+
+
     }
 }

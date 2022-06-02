@@ -22,7 +22,7 @@ public class WareDAO {
      * @return Der gewünschte Vertragspartner
      */
 
-    public Ware read(int warenNr) {
+    public Ware read(String warenNr) {
         Ware ware = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -36,7 +36,7 @@ public class WareDAO {
 
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setInt(1, warenNr);
+            preparedStatement.setString(1, warenNr);
 
             //SQL-Abfrage ausführen
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -45,7 +45,7 @@ public class WareDAO {
             resultSet.next();
 
             //ResultSet auswerten
-           int warennr = resultSet.getInt("warenNr");
+            String warennr = resultSet.getString("warenNr");
             String bz = resultSet.getString("bezeichnung");
             String bs = resultSet.getString("beschreibung");
             double preis = resultSet.getDouble("preis");
@@ -128,7 +128,7 @@ public class WareDAO {
     private Ware creatObject(ResultSet resultSet){
         Ware ware = null;
         try {
-            int warennr = resultSet.getInt("warenNr");
+            String warennr = resultSet.getString("warenNr");
             String bz = resultSet.getString("bezeichnung");
             String bs = resultSet.getString("beschreibung");
             double preis = resultSet.getDouble("preis");
@@ -183,7 +183,7 @@ public class WareDAO {
 
 
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1,ware.getWarenNr());
+            preparedStatement.setString(1,ware.getWarenNr());
             preparedStatement.setString(2,ware.getBezeichnung());
             preparedStatement.setString(3,ware.getBeschreibung());
             preparedStatement.setDouble(4,ware.getPreis());
