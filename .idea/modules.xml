@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Bibilothek/Bibilothek.iml" filepath="$PROJECT_DIR$/Bibilothek/Bibilothek.iml" />
       <module fileurl="file://$PROJECT_DIR$/Fifa/Fifa.iml" filepath="$PROJECT_DIR$/Fifa/Fifa.iml" />
       <module fileurl="file://$PROJECT_DIR$/Kaufvertrag/Kaufvertrag.iml" filepath="$PROJECT_DIR$/Kaufvertrag/Kaufvertrag.iml" />
       <module fileurl="file://$PROJECT_DIR$/Konto/Konto.iml" filepath="$PROJECT_DIR$/Konto/Konto.iml" />

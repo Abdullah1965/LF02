@@ -101,6 +101,7 @@ public class Ware {
 	@Override
 	public String toString() {
 		String text = bezeichnung;
+		text += "\n\t\tWarenNr: " + warenNr;
 		text += "\n\t\tBeschreibung: " + beschreibung;
 		text += "\n\t\tPreis: " + preis;
 		text += "\n\t\tBesonderheiten: " + besonderheitenListe;

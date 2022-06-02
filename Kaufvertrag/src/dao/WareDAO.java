@@ -1,5 +1,6 @@
 package dao;
 
+import businessObjects.Vertragspartner;
 import businessObjects.Ware;
 
 import java.sql.*;
@@ -156,5 +157,106 @@ public class WareDAO {
             e.printStackTrace();
         }
         return ware;
+    }
+
+
+    public Ware create(Ware ware) throws Exception {
+
+        connection = null;
+
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = DriverManager.getConnection(CONNECTIONSTRING);
+            //SQL-Abfrage erstellen
+            String sql = "INSERT INTO ware VALUES (?,?,?,?,?,?)";
+
+
+            String besonderheiten = " ";
+            for (String b : ware.getBesonderheitenListe()){
+                besonderheiten += b + "; ";
+            }
+            String maengel = " ";
+            for (String b : ware.getMaengelListe()){
+                maengel += b + "; ";
+            }
+
+
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,ware.getWarenNr());
+            preparedStatement.setString(2,ware.getBezeichnung());
+            preparedStatement.setString(3,ware.getBeschreibung());
+            preparedStatement.setDouble(4,ware.getPreis());
+            preparedStatement.setString(5,besonderheiten);
+            preparedStatement.setString(6,maengel);
+
+            //SQL-Abfrage ausführen
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new Exception("Doppelte ausweisnummer, Der vertragspartner mit der ausweisnummer " + ware.getWarenNr());
+        } finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return ware;
+    }
+
+
+    public void delete(String ausweisNr) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        // Verbindung zu Datenbank herstellen
+        try {
+            connection = DriverManager.getConnection(CONNECTIONSTRING);
+            //SQL-Abfrage erstellen
+            String sql = "DELETE FROM ware WHERE warenNR = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, ausweisNr);
+            //SQL-Abfrage ausführen
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void update(String warenNr, int preis, String beschreibung) {
+        connection = null;
+        PreparedStatement preparedStatement = null;
+        // Verbindung zu Datenbank herstellen
+        try {
+            connection = DriverManager.getConnection(CONNECTIONSTRING);
+            //SQL-Abfrage erstellen
+            String sql = "UPDATE ware SET beschreibung = ?,preis = ? WHERE warenNr = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, beschreibung );
+            preparedStatement.setDouble(2, preis);
+            preparedStatement.setString(3, warenNr);
+            //SQL-Abfrage ausführen
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

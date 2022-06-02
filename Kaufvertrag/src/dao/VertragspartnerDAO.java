@@ -152,13 +152,15 @@ public class VertragspartnerDAO {
             String sql = "INSERT INTO vertragspather VALUES (?,?,?,?,?,?,?)";
 
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, vertragspartner.getVorname());
-            preparedStatement.setString(2, vertragspartner.getNachname());
-            preparedStatement.setString(3, vertragspartner.getAdresse().getStrasse());
-            preparedStatement.setString(4, vertragspartner.getAdresse().getHausNr());
-            preparedStatement.setString(5, vertragspartner.getAdresse().getPlz());
-            preparedStatement.setString(6, vertragspartner.getAdresse().getOrt());
-            preparedStatement.setString(7, vertragspartner.getAusweisNr());
+            preparedStatement.setString(1, vertragspartner.getAusweisNr());
+            preparedStatement.setString(2, vertragspartner.getVorname());
+            preparedStatement.setString(3, vertragspartner.getNachname());
+            preparedStatement.setString(4, vertragspartner.getAdresse().getStrasse());
+            preparedStatement.setString(5, vertragspartner.getAdresse().getHausNr());
+            preparedStatement.setString(6, vertragspartner.getAdresse().getPlz());
+            preparedStatement.setString(7, vertragspartner.getAdresse().getOrt());
+
+
             //SQL-Abfrage ausführen
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -229,7 +231,7 @@ public class VertragspartnerDAO {
         }
     }
 
-
+/*
     public void insertInto(String ausweisNr, String vorname, String nachname, String strasse, String hausNr, String plz, String ort) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -260,6 +262,7 @@ public class VertragspartnerDAO {
             }
         }
     }
+*/
 
     private Vertragspartner createObject(ResultSet resultSet) throws SQLException {
         //ResultSet auswerten
