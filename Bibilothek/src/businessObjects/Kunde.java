@@ -1,6 +1,8 @@
 package businessObjects;
 
 public class Kunde {
+
+
     private String vorname;
     private String nachname;
     private String ausweisNr;

@@ -1,37 +1,23 @@
 package dao;
 
 import businessObjects.Adresse;
-import businessObjects.Vertragspartner;
-
-import java.sql.*;
-
-import static java.lang.Class.forName;
-
-import businessObjects.Adresse;
-import businessObjects.Vertragspartner;
+import businessObjects.Kunde;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class VertragspartnerDAO {
+public class KundeDao {
     private final String CLASSNAME = "org.sqlite.JDBC";
-    private final String CONNECTIONSTRING = "jdbc:sqlite:Kaufvertrag/src/data/Vetragspather.db";
+    private final String CONNECTIONSTRING = "jdbc:sqlite:Bibilothek/src/data/bucher.db";
     Connection connection;
 
-    public VertragspartnerDAO() throws ClassNotFoundException {
-        forName(CLASSNAME);
+    public KundeDao()throws ClassNotFoundException {
+        Class.forName(CLASSNAME);
     }
 
-    /**
-     * Liest einen Vertragspartner auf Basis seiner Ausweisnummer
-     *
-     * @param ausweisNr die Ausweisnummer
-     * @return Der gewünschte Vertragspartner
-     */
-
-    public Vertragspartner read(String ausweisNr) {
-        Vertragspartner vertragspartner = null;
-        Connection connection = null;
+    public Kunde read(String ausweisNr) {
+        Kunde kunde = null;
+        connection = null;
         PreparedStatement preparedStatement = null;
 
         // Verbindung zu Datenbank herstellen
@@ -39,7 +25,7 @@ public class VertragspartnerDAO {
             connection = DriverManager.getConnection(CONNECTIONSTRING);
 
             //SQL-Abfrage erstellen
-            String sql = "SELECT * FROM vertragspather WHERE ausweisNr = ?";
+            String sql = "SELECT * FROM Bibilothek WHERE Nr = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, ausweisNr);
 
@@ -59,9 +45,9 @@ public class VertragspartnerDAO {
             String ort = resultSet.getString("ort");
 
             //Vertragspartner erstellen
-            vertragspartner = new Vertragspartner(vorname, nachname);
-            vertragspartner.setAusweisNr(nr);
-            vertragspartner.setAdresse(new Adresse(strasse, hausNr, plz, ort));
+            kunde = new Kunde(vorname, nachname);
+            kunde.setAusweisNr(nr);
+            kunde.setAdresse(new Adresse(strasse, hausNr, plz, ort));
 
 
         } catch (SQLException e) {
@@ -79,12 +65,12 @@ public class VertragspartnerDAO {
                 }
             }
         }
-        return vertragspartner;
+        return kunde;
     }
 
-    public ArrayList<Vertragspartner> read() {
+    public ArrayList<Kunde> read() {
 
-        ArrayList<Vertragspartner> vertragspartnerArrayList = null;
+        ArrayList<Kunde> KundeArrayList = null;
         connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -93,12 +79,12 @@ public class VertragspartnerDAO {
             connection = DriverManager.getConnection(CONNECTIONSTRING);
 
             //SQL-Abfrage erstellen
-            String sql = "SELECT * FROM vertragspather";
+            String sql = "SELECT * FROM Bibilothek";
             preparedStatement = connection.prepareStatement(sql);
 
             //SQL-Abfrage ausführen
             ResultSet resultSet = preparedStatement.executeQuery();
-            vertragspartnerArrayList = new ArrayList<>();
+            KundeArrayList = new ArrayList<>();
 
             //Zeiger auf den ersten Datensatz setzen
             while (resultSet.next()) {
@@ -113,11 +99,11 @@ public class VertragspartnerDAO {
                 String plz = resultSet.getString("plz");
                 String ort = resultSet.getString("ort");
 
-                Vertragspartner vertragspartner = new Vertragspartner(vorname, nachname);
+                Kunde vertragspartner = new Kunde(vorname, nachname);
                 vertragspartner.setAusweisNr(nr);
                 vertragspartner.setAdresse(new Adresse(strasse, hausNr, plz, ort));
 
-                vertragspartnerArrayList.add(vertragspartner);
+                KundeArrayList.add(vertragspartner);
 
             }
 
@@ -137,34 +123,33 @@ public class VertragspartnerDAO {
                 }
             }
         }
-        return vertragspartnerArrayList;
+        return KundeArrayList;
     }
+    public Kunde create(Kunde kunde) throws Exception {
 
-    public Vertragspartner create(Vertragspartner vertragspartner) throws Exception {
-
-        Connection connection = null;
+        connection = null;
 
         PreparedStatement preparedStatement = null;
 
         try {
             connection = DriverManager.getConnection(CONNECTIONSTRING);
             //SQL-Abfrage erstellen
-            String sql = "INSERT INTO vertragspather VALUES (?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Bibilothek VALUES (?,?,?,?,?,?,?)";
 
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, vertragspartner.getAusweisNr());
-            preparedStatement.setString(2, vertragspartner.getVorname());
-            preparedStatement.setString(3, vertragspartner.getNachname());
-            preparedStatement.setString(4, vertragspartner.getAdresse().getStrasse());
-            preparedStatement.setString(5, vertragspartner.getAdresse().getHausNr());
-            preparedStatement.setString(6, vertragspartner.getAdresse().getPlz());
-            preparedStatement.setString(7, vertragspartner.getAdresse().getOrt());
+            preparedStatement.setString(1, kunde.getAusweisNr());
+            preparedStatement.setString(2, kunde.getVorname());
+            preparedStatement.setString(3, kunde.getNachname());
+            preparedStatement.setString(4, kunde.getAdresse().getStrasse());
+            preparedStatement.setString(5, kunde.getAdresse().getHausNr());
+            preparedStatement.setString(6, kunde.getAdresse().getPlz());
+            preparedStatement.setString(7, kunde.getAdresse().getOrt());
 
 
             //SQL-Abfrage ausführen
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new Exception("Doppelte ausweisnummer, Der vertragspartner mit der ausweisnummer " + vertragspartner.getAusweisNr());
+            throw new Exception("Doppelte ausweisnummer, Der vertragspartner mit der ausweisnummer " + kunde.getAusweisNr());
         } finally {
             try {
                 preparedStatement.close();
@@ -178,7 +163,7 @@ public class VertragspartnerDAO {
                 }
             }
         }
-        return vertragspartner;
+        return kunde;
     }
 
 
@@ -190,7 +175,7 @@ public class VertragspartnerDAO {
         try {
             connection = DriverManager.getConnection(CONNECTIONSTRING);
             //SQL-Abfrage erstellen
-            String sql = "DELETE FROM vertragspather WHERE ausweisNr = ?";
+            String sql = "DELETE FROM Bibilothek WHERE ausweisNr = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, ausweisNr);
             //SQL-Abfrage ausführen
@@ -213,7 +198,7 @@ public class VertragspartnerDAO {
         try {
             connection = DriverManager.getConnection(CONNECTIONSTRING);
             //SQL-Abfrage erstellen
-            String sql = "UPDATE vertragspather SET strasse = ?,hausNr = ? WHERE ausweisNr = ?";
+            String sql = "UPDATE Bibilothek SET strasse = ?,hausNr = ? WHERE ausweisNr = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, strasse );
             preparedStatement.setString(2, hausNr);
@@ -259,5 +244,9 @@ public class VertragspartnerDAO {
         return vertragspartner;
 
     }
+
+}
+
+
 
 }

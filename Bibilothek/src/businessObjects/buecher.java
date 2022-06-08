@@ -53,6 +53,13 @@ public class buecher {
         this.price = price;
     }
 
+    public String getLanguage() {
+        return language;
+    }
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
     public ArrayList<String> getCategory() {
         return category;
     }
