@@ -4,25 +4,25 @@ import java.util.ArrayList;
 
 public class buecher {
 
-    private String artikelNr;
+    private String Nr;
     private String titel;
-    private String autor;
-    private String seitenAnzahl;
-    private double preis;
-    private ArrayList<String> beschreibung;
-    private ArrayList<String> genre;
+    private String author;
+    private String pages;
+    private double price;
+    private ArrayList<String> category;
+    private String language;
 
     public buecher(String artikelNr,String titel,double preis){
-        this.artikelNr = artikelNr;
+        this.Nr = artikelNr;
         this.titel = titel;
-        this.preis = preis;
+        this.price = preis;
     }
 
-    public String getArtikelNr() {
-        return artikelNr;
+    public String getNr() {
+        return Nr;
     }
-    public void setArtikelNr(String artikelNr) {
-        this.artikelNr = artikelNr;
+    public void setNr(String nr) {
+        this.Nr = nr;
     }
 
     public String getTitel() {
@@ -32,45 +32,42 @@ public class buecher {
         this.titel = titel;
     }
 
-    public String getAutor() {
-        return autor;
+    public String getAuthor() {
+        return author;
     }
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
-
-    public String getSeitenAnzahl() {
-        return seitenAnzahl;
-    }
-    public void setSeitenAnzahl(String seitenAnzahl) {
-        this.seitenAnzahl = seitenAnzahl;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public double getPreis() {
-        return preis;
+    public String getPages() {
+        return pages;
     }
-    public void setPreis(double preis) {
-        this.preis = preis;
+    public void setPages(String pages) {
+        this.pages = pages;
     }
 
-    public ArrayList<String> getBeschreibung() {
-        return beschreibung;
+    public double getPrice() {
+        return price;
     }
-    public ArrayList<String> getGenre() {
-        return genre;
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public ArrayList<String> getCategory() {
+        return category;
     }
 
 
     @Override
     public String toString(){
         String text = " ";
-        text += "\n\t\tArtikelNr:" + artikelNr;
+        text += "\n\t\tNr:" + Nr;
         text += "\n\t\tTitel:" + titel;
-        text += "\n\t\tAutor:" + autor;
-        text += "\n\t\tSeitenAnzahl:" + seitenAnzahl;
-        text += "\n\t\tPreis:" + preis;
-        text += "\n\t\tBeschreibung" + beschreibung;
-        text += "\n\t\tGenre:" + genre;
+        text += "\n\t\tAuthor:" + author;
+        text += "\n\t\tPages:" + pages;
+        text += "\n\t\tPrice:" + price;
+        text += "\n\t\tcategory:" + category;
+        text += "\n\t\tLanguage:" + language;
         return text;
     }
 }
