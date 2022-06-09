@@ -2,17 +2,17 @@ package businessObjects;
 
 import java.util.ArrayList;
 
-public class buecher {
+public class Buecher {
 
     private String Nr;
     private String titel;
     private String author;
-    private String pages;
+    private int pages;
     private double price;
     private ArrayList<String> category;
     private String language;
 
-    public buecher(String artikelNr,String titel,double preis){
+    public Buecher(String artikelNr, String titel, double preis){
         this.Nr = artikelNr;
         this.titel = titel;
         this.price = preis;
@@ -39,10 +39,10 @@ public class buecher {
         this.author = author;
     }
 
-    public String getPages() {
+    public int getPages() {
         return pages;
     }
-    public void setPages(String pages) {
+    public void setPages(int pages) {
         this.pages = pages;
     }
 

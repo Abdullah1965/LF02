@@ -25,7 +25,7 @@ public class KundeDao {
             connection = DriverManager.getConnection(CONNECTIONSTRING);
 
             //SQL-Abfrage erstellen
-            String sql = "SELECT * FROM Bibilothek WHERE Nr = ?";
+            String sql = "SELECT * FROM kunden WHERE Nr = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, ausweisNr);
 
@@ -79,7 +79,7 @@ public class KundeDao {
             connection = DriverManager.getConnection(CONNECTIONSTRING);
 
             //SQL-Abfrage erstellen
-            String sql = "SELECT * FROM Bibilothek";
+            String sql = "SELECT * FROM kunden";
             preparedStatement = connection.prepareStatement(sql);
 
             //SQL-Abfrage ausführen
@@ -99,11 +99,11 @@ public class KundeDao {
                 String plz = resultSet.getString("plz");
                 String ort = resultSet.getString("ort");
 
-                Kunde vertragspartner = new Kunde(vorname, nachname);
-                vertragspartner.setAusweisNr(nr);
-                vertragspartner.setAdresse(new Adresse(strasse, hausNr, plz, ort));
+                Kunde kunde = new Kunde(vorname, nachname);
+                kunde.setAusweisNr(nr);
+                kunde.setAdresse(new Adresse(strasse, hausNr, plz, ort));
 
-                KundeArrayList.add(vertragspartner);
+                KundeArrayList.add(kunde);
 
             }
 
@@ -134,7 +134,7 @@ public class KundeDao {
         try {
             connection = DriverManager.getConnection(CONNECTIONSTRING);
             //SQL-Abfrage erstellen
-            String sql = "INSERT INTO Bibilothek VALUES (?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO kunden VALUES (?,?,?,?,?,?,?)";
 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, kunde.getAusweisNr());
@@ -149,7 +149,7 @@ public class KundeDao {
             //SQL-Abfrage ausführen
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new Exception("Doppelte ausweisnummer, Der vertragspartner mit der ausweisnummer " + kunde.getAusweisNr());
+            throw new Exception("Doppelte ausweisnummer, Der Kunde mit der ausweisnummer " + kunde.getAusweisNr());
         } finally {
             try {
                 preparedStatement.close();
@@ -175,7 +175,7 @@ public class KundeDao {
         try {
             connection = DriverManager.getConnection(CONNECTIONSTRING);
             //SQL-Abfrage erstellen
-            String sql = "DELETE FROM Bibilothek WHERE ausweisNr = ?";
+            String sql = "DELETE FROM kunden WHERE ausweisNr = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, ausweisNr);
             //SQL-Abfrage ausführen
@@ -198,7 +198,7 @@ public class KundeDao {
         try {
             connection = DriverManager.getConnection(CONNECTIONSTRING);
             //SQL-Abfrage erstellen
-            String sql = "UPDATE Bibilothek SET strasse = ?,hausNr = ? WHERE ausweisNr = ?";
+            String sql = "UPDATE kunden SET strasse = ?,hausNr = ? WHERE ausweisNr = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, strasse );
             preparedStatement.setString(2, hausNr);
@@ -216,8 +216,7 @@ public class KundeDao {
         }
     }
 
-
-    private Vertragspartner createObject(ResultSet resultSet) throws SQLException {
+    private Kunde createObject(ResultSet resultSet) throws SQLException {
         //ResultSet auswerten
         String nr = resultSet.getString("ausweisNr");
         String vorname = resultSet.getString("vorname");
@@ -231,7 +230,7 @@ public class KundeDao {
 
         //Vertragspartner erstellen
 
-        Vertragspartner vertragspartner = new Vertragspartner(vorname, nachname);
+        Kunde vertragspartner = new Kunde(vorname, nachname);
 
         vertragspartner.setAusweisNr(nr);
 
@@ -244,9 +243,5 @@ public class KundeDao {
         return vertragspartner;
 
     }
-
-}
-
-
 
 }
