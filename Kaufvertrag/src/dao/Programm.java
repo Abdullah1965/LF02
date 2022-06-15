@@ -10,67 +10,43 @@ public class Programm {
     public static void main(String[] args) throws Exception {
         VertragspartnerDAO vertragspartnerDAO = new VertragspartnerDAO();
         WareDAO wareDAO = new WareDAO();
+/*
+        Vertragspartner vertragspartner = new Vertragspartner("Ich","und Du");
+        vertragspartner.setAusweisNr("99");
+        vertragspartner.setAdresse(new Adresse("Hallo","3a","28222","Bremen"));
+        vertragspartnerDAO.create(vertragspartner);
+        vertragspartnerDAO.read("99");
 
-     /*
 
-     Creat new
 
-        Vertragspartner vertragspartner1 = new Vertragspartner("Ich","und Du");
-        vertragspartner1.setAusweisNr("2");
-        vertragspartner1.setAdresse(new Adresse("Hallo","3a","28222","Bremen"));
-        vertragspartnerDAO.create(vertragspartner1);
-
-        Delete
-
-        vertragspartnerDAO.delete("0");
-
-        Updata
-
-        vertragspartnerDAO.update("1","strasse","1");
-
-        Ware ware = new Ware("Laptop2", 250.0);
-        ware.setWarenNr(2);
-        ware.setBeschreibung("Super krasses Gaming-Laptop");
-        ware.getBesonderheitenListe().add("Tasche");
-        ware.getBesonderheitenListe().add("Gaming-Maus");
-        ware.getMaengelListe().add("Ladekabel fehlt");
-        ware.getMaengelListe().add("Touchpad defekt");
-        wareDAO.create(ware);
-
-        wareDAO.delete("0");
-
-        wareDAO.update("1",500,"Laptop");
-    */
-        Ware ware = new Ware("Laptop3", 250.0);
-        ware.setWarenNr("3");
-        ware.setBeschreibung("Super krasses Gaming-Laptop");
-        ware.getBesonderheitenListe().add("Tasche");
-        ware.getBesonderheitenListe().add("Gaming-Maus");
-        ware.getMaengelListe().add("Ladekabel fehlt");
-        ware.getMaengelListe().add("Touchpad defekt");
+        vertragspartnerDAO.update("99","strasse11","25852");
+*/
+/*
+        Ware ware = new Ware("Laptop9", 280.0);
+        ware.setWarenNr("99");
+        ware.setBeschreibung("Super krasses Gaming-Laptop5");
+        ware.getBesonderheitenListe().add("Tasche3");
+        ware.getBesonderheitenListe().add("Gaming-Maus2");
+        ware.getMaengelListe().add("Ladekabel fehlt1");
+        ware.getMaengelListe().add("Touchpad defekt1");
 
         wareDAO.create(ware);
+*/
+        wareDAO.read("99");
+//        wareDAO.update("99",500,"Laptop");
+        
 
-        wareDAO.read("3");
-
-        wareDAO.update("3",500,"Gaming-Laptop");
-
-        wareDAO.read("3");
-
-        wareDAO.delete("3");
-
-
-
-   /*     ArrayList<Vertragspartner> vertragspartnerArrayList = vertragspartnerDAO.read();
+/*
+        ArrayList<Vertragspartner> vertragspartnerArrayList = vertragspartnerDAO.read();
         System.out.println("-------------------------------");
         for (Vertragspartner v: vertragspartnerArrayList){
             System.out.println(v);
         }
+*/
 
-    */
 
       //  Ware ware = wareDAO.read("0");
-       // System.out.println(ware);
+      // System.out.println(ware);
 
 
 

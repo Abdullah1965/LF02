@@ -142,7 +142,7 @@ public class VertragspartnerDAO {
 
     public Vertragspartner create(Vertragspartner vertragspartner) throws Exception {
 
-        Connection connection = null;
+        connection = null;
 
         PreparedStatement preparedStatement = null;
 
@@ -164,7 +164,7 @@ public class VertragspartnerDAO {
             //SQL-Abfrage ausführen
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new Exception("Doppelte ausweisnummer, Der vertragspartner mit der ausweisnummer " + vertragspartner.getAusweisNr());
+            throw new Exception();
         } finally {
             try {
                 preparedStatement.close();

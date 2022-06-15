@@ -73,7 +73,12 @@ public class WareDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
+        }finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
             try {
                 connection.close();
             } catch (SQLException e) {
