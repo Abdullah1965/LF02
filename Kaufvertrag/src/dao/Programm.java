@@ -9,7 +9,9 @@ import java.util.ArrayList;
 public class Programm {
     public static void main(String[] args) throws Exception {
         VertragspartnerDAO vertragspartnerDAO = new VertragspartnerDAO();
-        WareDAO wareDAO = new WareDAO();
+        Ware wareDAO = new WareDAO().read("1");
+
+
 /*
         Vertragspartner vertragspartner = new Vertragspartner("Ich","und Du");
         vertragspartner.setAusweisNr("99");
@@ -32,9 +34,10 @@ public class Programm {
 
         wareDAO.create(ware);
 */
-        wareDAO.read("99");
+
+
 //        wareDAO.update("99",500,"Laptop");
-        
+
 
 /*
         ArrayList<Vertragspartner> vertragspartnerArrayList = vertragspartnerDAO.read();
@@ -46,7 +49,7 @@ public class Programm {
 
 
       //  Ware ware = wareDAO.read("0");
-      // System.out.println(ware);
+         System.out.println(wareDAO);
 
 
 
