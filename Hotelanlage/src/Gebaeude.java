@@ -1,31 +1,28 @@
 import java.util.ArrayList;
 
-public class Etage {
+public class Gebaeude {
     private String name;
-    private ArrayList<Zimmer> zimmerList;
+    private ArrayList<Etage> etageList;
 
-    public Etage (String name){
+    Gebaeude (String name){
         this.name=name;
-    }
 
-    public ArrayList<Zimmer> getZimmerList() {
-        return zimmerList;
     }
 
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
+    public ArrayList<Etage> getEtageList() {
+        return etageList;
+    }
+    public int getAnzahlEtagen(){
+        return getAnzahlEtagen();
+    }
     public int getAnzahlZimmerFrei(){
-        int anazhl = 0;
-        for (Zimmer zimmer : zimmerList){
-            if (zimmer.getAnzahlGaeste()){
-                anazhl += getAnzahlZimmerFrei();
-            }
-        }
+        return getAnzahlZimmerFrei();
     }
     public int getAnzahlZimmer(){
         return getAnzahlZimmer();
@@ -36,10 +33,9 @@ public class Etage {
 
     @Override
     public String toString() {
-        return "Etage{" +
+        return "Gebaeude{" +
                 "name='" + name + '\'' +
-                ", zimmerList=" + zimmerList +
+                ", etageList=" + etageList +
                 '}';
     }
 }
-
