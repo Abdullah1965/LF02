@@ -21,4 +21,14 @@ public class Gast extends Person {
     public Adresse getAdresse() {
         return adresse;
     }
+
+    @Override
+    public String toString() {
+        String t = " ";
+        t += "\nNr: " + Nr;
+        t += "\nVorname: " + getVorname();
+        t += "\nNachname: " + getNachname();
+        t += "\nAdresse: " + adresse;
+        return t;
+    }
 }
