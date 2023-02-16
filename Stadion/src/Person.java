@@ -1,19 +1,19 @@
 public abstract class Person {
-    private String vorname;
+    private String name;
     private int alter;
 
     public Person(String vorname, int alter) {
-        this.vorname = vorname;
+        this.name = vorname;
         this.alter = alter;
 
     }
 
-    public String getVorname() {
-        return vorname;
+    public String getName() {
+        return name;
     }
 
-    public void setVorname(String vorname) {
-        this.vorname = vorname;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getAlter() {
