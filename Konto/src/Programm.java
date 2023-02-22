@@ -12,7 +12,6 @@ public class Programm {
 
         Girokonto girokonto1 = new Girokonto(kunde1, 1.0, 0.0, 15.0);
         Girokonto girokonto2 = new Girokonto(kunde2, 1.0, 5000.0, 10.0);
-        Sparkonto sparkonto1 = new Sparkonto(kunde1, 3.0);
 
         System.out.println(mitarbeiter);
         System.out.println(kunde1);

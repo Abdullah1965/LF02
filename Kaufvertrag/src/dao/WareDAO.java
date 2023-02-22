@@ -12,19 +12,21 @@ public class WareDAO {
     private final String CLASSNAME = "org.sqlite.JDBC";
     private final String CONNECTIONSTRING = "jdbc:sqlite:Kaufvertrag/src/data/Vetragspather.db";
     private Connection connection;
+
     public WareDAO() throws ClassNotFoundException {
         forName(CLASSNAME);
     }
 
     /**
      * Liest einen Vertragspartner auf Basis seiner Ausweisnummer
+     *
      * @param warenNr die Ausweisnummer
      * @return Der gewünschte Vertragspartner
      */
 
     public Ware read(String warenNr) {
         Ware ware = null;
-        Connection connection = null;
+        connection = null;
         PreparedStatement preparedStatement = null;
 
         // Verbindung zu Datenbank herstellen
@@ -53,27 +55,28 @@ public class WareDAO {
             String maengel = resultSet.getString("maengel");
 
             //Vertragspartner erstellen
-            ware = new Ware(bz,preis);
+            ware = new Ware(bz, preis);
             ware.setWarenNr(warennr);
             ware.setBeschreibung(bs);
 
-            if (besonderheiten != null){
+            if (besonderheiten != null) {
                 String[] besonderheitenArray = besonderheiten.split(";");
-                for (String b: besonderheitenArray){
+                for (String b : besonderheitenArray) {
                     ware.getBesonderheitenListe().add(b);
                 }
             }
 
-            if (maengel != null){
+            if (maengel != null) {
                 String[] maengelArray = maengel.split(";");
-                for (String maegel: maengelArray){
-                   ware.getMaengelListe().add(maegel);
+                for (String maegel : maengelArray) {
+                    ware.getMaengelListe().add(maegel);
                 }
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+            System.out.println(e.getClass().getName() + ": " + e.getMessage());
+        } finally {
             try {
                 preparedStatement.close();
             } catch (SQLException e) {
@@ -83,13 +86,14 @@ public class WareDAO {
                     connection.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
             }
         }
         return ware;
     }
 
-    public ArrayList<Ware> read(){
+    public ArrayList<Ware> read() {
         ArrayList<Ware> wareArrayList = null;
         connection = null;
         PreparedStatement preparedStatement = null;
@@ -110,7 +114,6 @@ public class WareDAO {
             while (resultSet.next()) {
                 Ware ware = creatObject(resultSet);
                 wareArrayList.add(ware);
-
             }
 
         } catch (SQLException e) {
@@ -131,7 +134,7 @@ public class WareDAO {
         return wareArrayList;
     }
 
-    private Ware creatObject(ResultSet resultSet){
+    private Ware creatObject(ResultSet resultSet) {
         Ware ware = null;
         try {
             String warennr = resultSet.getString("warenNr");
@@ -159,7 +162,7 @@ public class WareDAO {
                     ware.getMaengelListe().add(maegel);
                 }
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return ware;
@@ -179,25 +182,28 @@ public class WareDAO {
 
 
             String besonderheiten = " ";
-            for (String b : ware.getBesonderheitenListe()){
+            for (String b : ware.getBesonderheitenListe()) {
                 besonderheiten += b + "; ";
             }
+
+
             String maengel = " ";
-            for (String b : ware.getMaengelListe()){
+            for (String b : ware.getMaengelListe()) {
                 maengel += b + "; ";
             }
 
 
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,ware.getWarenNr());
-            preparedStatement.setString(2,ware.getBezeichnung());
-            preparedStatement.setString(3,ware.getBeschreibung());
-            preparedStatement.setDouble(4,ware.getPreis());
-            preparedStatement.setString(5,besonderheiten);
-            preparedStatement.setString(6,maengel);
+            preparedStatement.setString(1, ware.getWarenNr());
+            preparedStatement.setString(2, ware.getBezeichnung());
+            preparedStatement.setString(3, ware.getBeschreibung());
+            preparedStatement.setDouble(4, ware.getPreis());
+            preparedStatement.setString(5, besonderheiten);
+            preparedStatement.setString(6, maengel);
 
             //SQL-Abfrage ausführen
             preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             throw new Exception("Doppelte ausweisnummer, Der vertragspartner mit der ausweisnummer " + ware.getWarenNr());
         } finally {
@@ -234,9 +240,15 @@ public class WareDAO {
             e.printStackTrace();
         } finally {
             try {
-                connection.close();
+                preparedStatement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -250,7 +262,7 @@ public class WareDAO {
             //SQL-Abfrage erstellen
             String sql = "UPDATE ware SET beschreibung = ?,preis = ? WHERE warenNr = ?";
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, beschreibung );
+            preparedStatement.setString(1, beschreibung);
             preparedStatement.setDouble(2, preis);
             preparedStatement.setString(3, warenNr);
             //SQL-Abfrage ausführen
@@ -259,9 +271,15 @@ public class WareDAO {
             e.printStackTrace();
         } finally {
             try {
-                connection.close();
+                preparedStatement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

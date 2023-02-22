@@ -15,13 +15,6 @@ public class GastDao {
         }
     }
 
-    public Gast findById(int gastNr) throws GastNotCheckInException {
-        if (!gastMap.containsKey(gastNr)) {
-            throw new GastNotCheckInException(gastMap.get(gastNr));
-        }
-        return gastMap.get(gastNr);
-    }
-
     public List<Gast> FindAll(){
         return gastMap.values().stream().toList();
     }
@@ -32,6 +25,13 @@ public class GastDao {
         } else {
             gastMap.replace(gast.getNr(),gast);
         }
+    }
+
+    public Gast findById(int gastNr) throws GastNotCheckInException {
+        if (!gastMap.containsKey(gastNr)) {
+            throw new GastNotCheckInException(gastMap.get(gastNr));
+        }
+        return gastMap.get(gastNr);
     }
 
     public void delete(Gast gast)throws GastNotCheckInException {

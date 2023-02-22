@@ -2,7 +2,6 @@ package dao;
 
 import businessObjects.Adresse;
 import businessObjects.Vertragspartner;
-
 import java.sql.*;
 
 import static java.lang.Class.forName;
@@ -15,11 +14,11 @@ import java.util.ArrayList;
 
 public class VertragspartnerDAO {
     private final String CLASSNAME = "org.sqlite.JDBC";
-    private final String CONNECTIONSTRING = "jdbc:sqlite:Kaufvertrag/src/data/Vetragspather.db";
+        private final String CONNECTIONSTRING = "jdbc:sqlite:Kaufvertrag/src/data/Vetragspather.db";
     Connection connection;
 
     public VertragspartnerDAO() throws ClassNotFoundException {
-        forName(CLASSNAME);
+        Class.forName(CLASSNAME);
     }
 
     /**
@@ -163,6 +162,7 @@ public class VertragspartnerDAO {
 
             //SQL-Abfrage ausführen
             preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             throw new Exception();
         } finally {
@@ -195,6 +195,7 @@ public class VertragspartnerDAO {
             preparedStatement.setString(1, ausweisNr);
             //SQL-Abfrage ausführen
             preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -220,6 +221,7 @@ public class VertragspartnerDAO {
             preparedStatement.setString(3, ausweisNr);
             //SQL-Abfrage ausführen
             preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
