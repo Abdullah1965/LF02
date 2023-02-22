@@ -34,6 +34,8 @@ public class GastDao {
         return gastMap.get(gastNr);
     }
 
+
+
     public void delete(Gast gast)throws GastNotCheckInException {
         if (!gastMap.containsKey(gast.getNr())){
             throw new GastNotCheckInException(gast);
