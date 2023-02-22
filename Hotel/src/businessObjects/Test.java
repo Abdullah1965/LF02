@@ -10,6 +10,7 @@ public class Test {
         GastDao Dao = new GastDao();
         List<Gast> gastListe;
 
+        //hallo
         System.out.println("\nLeere DatenBank prüfen");
         gastListe = Dao.FindAll();
         System.out.println("Anzahl: " + gastListe.size());
