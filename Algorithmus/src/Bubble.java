@@ -21,9 +21,6 @@ public class Bubble {
             System.out.print(array1[i] + " ");
         }
 
-
-
-
         System.out.println();
         System.out.println("M Art");
         for(int i = 0; i<len; ++i){
@@ -61,8 +58,6 @@ public class Bubble {
         System.out.println("Sorted Array in Ascending Order: ");
         System.out.println(Arrays.toString(data));
         System.out.println();
-
-
 
         int[] data1 = { 8, 7, 2, 1, 0, 9, 6 };
         System.out.println("Unsorted Array");
