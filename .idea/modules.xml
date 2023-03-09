@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Algorithmus/Algorithmus.iml" filepath="$PROJECT_DIR$/Algorithmus/Algorithmus.iml" />
       <module fileurl="file://$PROJECT_DIR$/Bibilothek/Bibilothek.iml" filepath="$PROJECT_DIR$/Bibilothek/Bibilothek.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Einstellungen/Einstellungen.iml" filepath="$PROJECT_DIR$/Einstellungen/Einstellungen.iml" />
       <module fileurl="file://$PROJECT_DIR$/Fifa/Fifa.iml" filepath="$PROJECT_DIR$/Fifa/Fifa.iml" />
       <module fileurl="file://$PROJECT_DIR$/Hotel/Hotel.iml" filepath="$PROJECT_DIR$/Hotel/Hotel.iml" />
       <module fileurl="file://$PROJECT_DIR$/Interface/Interface.iml" filepath="$PROJECT_DIR$/Interface/Interface.iml" />

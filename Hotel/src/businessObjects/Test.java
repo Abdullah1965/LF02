@@ -21,6 +21,7 @@ public class Test {
         }catch (GastAlreadyCheckedInException e){
             System.out.println(e.getMassage());
         }
+
         System.out.println("\nDatenBank prüfen");
         gastListe = Dao.FindAll();
         System.out.println("Anzahl: " + gastListe);
